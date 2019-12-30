@@ -83,32 +83,35 @@ int main() {
 //attempt2
 #include <iostream>
 #include <cstdio>
-#include <algorithm>
-#include <deque>
+#define N 5001
 using namespace std;
 struct node
 {
-    int data;
-    int data2;
-    int data3;
-    bool operator < (node nodeNew)
-    {
-        return data*10000+data2*100+data3<nodeNew.data*10000+nodeNew.data2*100+nodeNew.data3 ? 1:0;
-    }
+    int hour;
+    int minute;
+    int second;
+    int S;
 };
+
 int main()
 {
     unsigned int number;
     scanf("%d",&number);
-    deque <node> myList;
+    struct node cows[N];
+    struct node temp;
     for(int i=0;i<number;i++)
     {
-        node time;
-        scanf("%d %d %d",&time.data,&time.data2,&time.data3);
-        myList.push_back(time);
+        cin >> cows[i].hour >> cows[i].minute >> cows[i].second;
+        cows[i].S = cows[i].hour * 3600 + cows[i].minute * 60 + cows[i].second;
     }
-    deque<node>::iterator i;
-    sort(myList.begin(),myList.end());
-    for(i=myList.begin();i!=myList.end();i++)
-        cout<<(*i).data<<" "<<(*i).data2<<" "<<(*i).data3<<endl;
+    for(int i=0; i<number-1; i++)
+        for(int j=0; j<number-1-i; j++) {
+            if(cows[j].S>cows[j+1].S){
+                temp=cows[j];
+                cows[j]=cows[j+1];
+                cows[j+1]=temp;
+            }
+        }
+    for(int i=0;i<number;i++)
+        cout << cows[i].hour << " " << cows[i].minute << " " << cows[i].second << endl;
 }
