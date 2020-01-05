@@ -14,20 +14,19 @@
 #include <cstdio>
 #include <cstring>
 #include <vector>
-using namespace std;
-  
-const int N=100010;
 #define max(a,b) a>=b?a:b
-  
+using namespace std;
+#define N 100010
+ 
 struct node {
     int v,w;
     node() {};
     node(int V,int W) { v=V;w=W; };
 };
-  
+
 int n,p,f[N],sum,maxx;
 vector <node> G[N];
- 
+
 void dfs(int u,int fa) {//求树的直径
     for(int i=0,v,w;i<G[u].size();i++) {
         v=G[u][i].v,w=G[u][i].w;
