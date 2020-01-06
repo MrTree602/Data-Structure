@@ -8,7 +8,7 @@
 
 //attempt1
 //广度优先遍历
-#include<iostream>
+/*#include<iostream>
 #define N 102
 #define MAX 999999
 using namespace std;
@@ -71,11 +71,11 @@ int main() {
     }
     cout << que[tail - 1].s << endl;
     return 0;
-}
+}*/
 
 //attempt2
 //深度优先搜索
-/*#include <iostream>
+#include <iostream>
 using namespace std;
 //全局变量自动初始化为0
 int startPosition,endPosition,visited[10],matrix[25][25],n,k;//n,k分别代表城市的数量和航线的数量。
@@ -91,7 +91,7 @@ int main()
         matrix[i][j] = 1;
     }
     Dfs(startPosition,0);
-    cout << min_dis;
+    cout << min_dis-1;
     return 0;
 }
 void Dfs(int v,int distance)
@@ -113,4 +113,4 @@ void Dfs(int v,int distance)
             visited[i] = 0;
         }
     }
-}*/
+}
