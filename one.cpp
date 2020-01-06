@@ -17,7 +17,7 @@
 #define max(a,b) a>=b?a:b
 using namespace std;
 #define N 100010
- 
+
 struct node {
     int v,w;
     node() {};

@@ -8,66 +8,83 @@
 
 //attempt1
 //广度优先遍历
-/*#include <iostream>
+#include<iostream>
+#define N 102
+#define MAX 999999
 using namespace std;
-struct node
-{
-    int x; //表示城市的编号
-    int s; //表示运动的距离
-};
-//全局变量自动初始化为0
-int startPosition,endPosition,visited[10],matrix[25][25],m,n;//m,n分别代表城市的数量和航线的数量。
-struct node myQueue[20];
-int main()
-{
-    int head = 1,tail = 1;
-    cin >> m >> n >> startPosition >> endPosition;
-    for(int k = 1;k <= n;k++)
-    {
-        int i,j;
-        cin >> i >> j;
-        matrix[i][j] = 1;
-    }
-    myQueue[tail].x = startPosition;
-    myQueue[tail].s = 0;
-    visited[tail++] = 1;
-    while(head != tail)
-    {
-        int v = myQueue[head].x;
-        if(v == endPosition)
-        {
-            break;
+typedef struct Node {
+    int x;
+    int s;
+}node;
+int main() {
+    node que[N];
+    int i, j, k, l;
+    int n, m;
+    int begin_city, end_city;
+    int map[N][N];
+    int head=1, tail=1;
+    bool book[N] = { 0 };
+    bool flag = 0;
+
+    //读入数据
+    cin >> n >> m >> begin_city >> end_city;
+
+    //map初始化
+    for (i = 1;i <= n;++i) {
+        for (j = 1;j <= n;++j) {
+            if (i == j)
+                map[i][j] = 0;
+            else map[i][j] = MAX;
         }
-        for(int i = 1;i <= n;i++)
-        {
-            if(matrix[v][i] == 1 && visited[i] == 0)
-            {
-                myQueue[tail].x = i;
-                myQueue[tail].s = myQueue[head].s + 1;
-                visited[tail++] = 1;
+    }
+    for (i = 0;i < m;++i) {
+        cin >> k >> l;
+        map[k][l] = 1;
+        map[l][k] = 1;
+    }
+
+    //广度优先遍历
+    que[tail].x = begin_city;
+    que[tail].s = 0;
+    tail++;
+    book[begin_city] = 1;
+    while (head < tail) {
+        k = que[head].x;
+        for (i = 1;i <= n;++i) {
+            //入队
+            if (map[head][i] != MAX&&book[i] == 0) {
+                que[tail].x = i;
+                que[tail].s = que[head].s + 1;
+                tail++;
+                book[i] = 1;
             }
+            //截止条件
+            if (que[tail-1].x == end_city) {
+                flag = 1;
+                break;
+            }
+        }
+        if (flag == 1) {
+            break;
         }
         head++;
     }
-    for(int i = 1;i < tail - 1;i++)
-    {
-        cout << myQueue[i].x << " " << myQueue[i].s << endl;
-    }
+    cout << que[tail - 1].s << endl;
     return 0;
-}*/
+}
 
 //attempt2
 //深度优先搜索
-#include <iostream>
+/*#include <iostream>
 using namespace std;
 //全局变量自动初始化为0
-int startPosition,endPosition,visited[10],matrix[25][25],m,n;//m,n分别代表城市的数量和航线的数量。
+int startPosition,endPosition,visited[10],matrix[25][25],n,k;//n,k分别代表城市的数量和航线的数量。
 int min_dis = 999999;
 void Dfs(int v,int distance);
 int main()
 {
-    cin >> m >> n >> startPosition >> endPosition;
-    for(int k = 1;k <= n;k++)
+    cin >> n >> k >> startPosition >> endPosition;
+    for(int m = 1; m <= k; m++)
     {
         int i,j;
         cin >> i >> j;
@@ -87,7 +104,7 @@ void Dfs(int v,int distance)
         }
         return;
     }
-    for(int i = 1;i <= m;i++)
+    for(int i = 1;i <= n;i++)
     {
         if(matrix[v][i] == 1&&visited[i] == 0)
         {
@@ -96,4 +113,4 @@ void Dfs(int v,int distance)
             visited[i] = 0;
         }
     }
-}
+}*/
